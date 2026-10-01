@@ -1,0 +1,34 @@
+{
+  "name": "orangehrm-playwright-automation",
+  "version": "1.0.0",
+  "description": "Senior QA automation framework for OrangeHRM UI, API, and performance validation",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --grep-invert @api",
+    "test:api": "playwright test --grep @api",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "test:ci": "playwright test --reporter=line,junit,html",
+    "perf:prepare": "node scripts/export-performance-data.js",
+    "perf:run": "npm run perf:prepare && k6 run performance/login-api.js && k6 run performance/employee-creation-api.js"
+  },
+  "keywords": [
+    "playwright",
+    "orangehrm",
+    "automation",
+    "api",
+    "performance"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.3"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}
