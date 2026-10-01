@@ -29,15 +29,18 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run UI tests
-        run: npm run test:ui
+        run: npm run test:ui -- --project=chromium --workers=1
 
       - name: Run API tests
+        if: ${{ !cancelled() }}
         run: npm run test:api
 
       - name: Install k6
+        if: ${{ !cancelled() }}
         uses: grafana/setup-k6-action@v1
 
       - name: Run performance tests
+        if: ${{ !cancelled() }}
         run: npm run perf:run
 
       - name: Upload Playwright report
